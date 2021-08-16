@@ -27,7 +27,7 @@ SOFTWARE.
 
 import { sha3, toHex, ZERO_ADDRESS } from './ContractUtils';
 
-const { ContractType } = require("../deployment/contracts.config");
+import { ContractType } from '../scripts/types';
 
 const getContractFromTruffle = (c) => {
   // @ts-ignore

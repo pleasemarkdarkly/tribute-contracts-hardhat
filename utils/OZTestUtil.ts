@@ -52,7 +52,10 @@ import {
 import{ expectRevert } from '@openzeppelin/test-helpers';
 import { expect } from 'chai';
 
-const deployFunction = async (contractInterface, args, from) => {
+export { expect, expectRevert, }
+
+// @ts-ignore
+export const deployFunction = async (contractInterface, args, from) => {
   if (!contractInterface) throw Error("Invalid contract interface");
   const f = from ? from : accounts[0];
   if (args) {
@@ -62,20 +65,24 @@ const deployFunction = async (contractInterface, args, from) => {
   }
 };
 
-const getContractFromOpenZeppelin = (c) => {
+export const getContractFromOpenZeppelin = (c) => {
   return contract.fromArtifact(c.substring(c.lastIndexOf("/") + 1));
 };
 
-const getOpenZeppelinContracts = (contracts) => {
+// @ts-ignore
+export const getOpenZeppelinContracts = (contracts) => {
   return contracts
+    // @ts-ignore
     .filter((c) => c.enabled)
+    // @ts-ignore
     .reduce((previousValue, contract) => {
       previousValue[contract.name] = getContractFromOpenZeppelin(contract.path);
       return previousValue;
     }, {});
 };
 
-const getDefaultOptions = (options) => {
+// @ts-ignore
+export const getDefaultOptions = (options) => {
   let o = {
     unitPrice: unitPrice,
     nbUnits: numberOfUnits,
@@ -94,7 +101,8 @@ const getDefaultOptions = (options) => {
   return o;
 };
 
-const advanceTime = async (time) => {
+// @ts-ignore
+export const advanceTime = async (time) => {
   await new Promise((resolve, reject) => {
     // @ts-ignore
     web3.currentProvider.send(
@@ -103,7 +111,7 @@ const advanceTime = async (time) => {
         method: "evm_increaseTime",
         params: [time],
         id: new Date().getTime(),
-      },
+      }, // @ts-ignore
       (err, result) => {
         if (err) {
           return reject(err);
@@ -120,7 +128,7 @@ const advanceTime = async (time) => {
         jsonrpc: "2.0",
         method: "evm_mine",
         id: new Date().getTime(),
-      },
+      }, // @ts-ignore
       (err, result) => {
         if (err) {
           return reject(err);
@@ -146,6 +154,7 @@ const takeChainSnapshot = async () => {
         if (err) {
           return reject(err);
         }
+        // @ts-ignore
         let snapshotId = result.result; // {"id":X,"jsonrpc":"2.0","result":"0x..."}
         return resolve(snapshotId);
       }
@@ -153,6 +162,7 @@ const takeChainSnapshot = async () => {
   );
 };
 
+// @ts-ignore
 const revertChainSnapshot = async (snapshotId) => {
   return await new Promise((resolve, reject) =>
     provider.send(
@@ -184,11 +194,11 @@ const proposalIdGenerator = () => {
   };
 };
 
-module.exports = (() => {
-  // @ts-ignore TODO:
+export const defaultTributeDAO = (() => {
+  // @ts-ignore 
   import { contracts } from '../deployment/test.config';
   const ozContracts = getOpenZeppelinContracts(contracts);
-
+// @ts-ignore
   const deployDefaultDao = async (options) => {
     return await deployDao({
       ...getDefaultOptions(options),
@@ -197,6 +207,7 @@ module.exports = (() => {
     });
   };
 
+  // @ts-ignore
   const deployDefaultNFTDao = async ({ owner }) => {
     const { dao, adapters, extensions, testContracts } = await deployDao({
       ...getDefaultOptions({ owner }),
@@ -216,6 +227,7 @@ module.exports = (() => {
     };
   };
 
+  // @ts-ignore
   const deployDaoWithOffchainVoting = async ({ owner, newMember }) => {
     const {
       dao,
@@ -254,6 +266,7 @@ module.exports = (() => {
     };
   };
 
+  // @ts-ignore
   const deployDaoWithBatchVoting = async ({ owner, newMember }) => {
     const { dao, adapters, extensions, votingHelpers } = await deployDao({
       ...getDefaultOptions({ owner }),

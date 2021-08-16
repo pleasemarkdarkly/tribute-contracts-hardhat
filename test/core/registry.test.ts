@@ -21,13 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-import { fromUtf8, ETH_TOKEN } from '../../utils/ContractUtil';
-
-import {
-  expectRevert,
-  expect,
-  DaoRegistry,
-} from '../../utils/OZTestUtil';
+import { fromUtf8, ETH_TOKEN } from '../../utils/ContractUtils';
+import { expectRevert, expect, DaoRegistry } from '../../utils/OZTestUtil';
 
 describe("Core - Registry", () => {
   it("should not be possible to add a module with invalid id", async () => {

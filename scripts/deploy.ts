@@ -16,6 +16,7 @@ async function main(): Promise<void> {
     If this runs in a standalone fashion you may want to call compile manually
     to make sure everything is compiled
     await run("compile"); We get the contract to deploy */
+    
     /*
     const Factory: ContractFactory = await ethers.getContractFactory('TestToken');
     const TestToken: Contract = await Factory.deploy();
