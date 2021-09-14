@@ -112,7 +112,7 @@ export const contracts: TributeContract[] = [
   },
   {
     name: "ERC1155TokenExtensionFactory",
-    path: "../contracts/extensions/erc1155/ERC1155CollectionFactory",
+    path: "../contracts/extensions/erc1155/ERC1155TokenExtensionFactory",
     enabled: true,
     version: "1.0.0",
     type: ContractType.Factory,
